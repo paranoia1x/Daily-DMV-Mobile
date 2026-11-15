@@ -11,47 +11,46 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DMV Practice">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/app.css">
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/icon-180.png">
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="Skip to main content">Skip to main content</a>
-<header class="topbar">
-  <button type="button" class="brand" data-nav="home" aria-label="CA Driver Test Practice, go to Home" data-i18n-aria="CA Driver Test Practice, go to Home"><img src="img/logo.svg" alt="" width="40" height="40"><span>CA Driver Test Practice</span></button>
-  <nav aria-label="Main" class="tabbar" data-i18n-aria="Main">
-    <button type="button" data-nav="home"><span class="ico" aria-hidden="true">🏠</span><span class="lbl" data-i18n="Home">Home</span></button>
-    <button type="button" data-nav="handbook"><span class="ico" aria-hidden="true">📖</span><span class="lbl" data-i18n="Handbook">Handbook</span></button>
-    <button type="button" data-nav="progress"><span class="ico" aria-hidden="true">📊</span><span class="lbl" data-i18n="Progress">Progress</span></button>
-    <button type="button" data-nav="settings"><span class="ico" aria-hidden="true">⚙️</span><span class="lbl" data-i18n="Settings">Settings</span></button>
-    <button type="button" data-nav="sources"><span class="ico" aria-hidden="true">🔗</span><span class="lbl" data-i18n="Sources">Sources</span></button>
-    <button type="button" data-nav="help"><span class="ico" aria-hidden="true">❓</span><span class="lbl" data-i18n="Help">Help</span></button>
-  </nav>
+<header class="appbar" id="appbar">
+  <button type="button" class="iconbtn" id="abBack" data-action="back" hidden aria-label="Back" data-i18n-aria="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <img id="abLogo" class="logo" src="img/logo.svg" alt="" width="30" height="30">
+  <h1 id="abTitle" tabindex="-1">CA Driver Test Practice</h1>
+  <div id="abRight" class="row nowrap"></div>
 </header>
 <div id="banner" class="banner" role="alert" hidden></div>
 <main id="main" tabindex="-1"></main>
-<footer class="footer">
-  <p id="notice"></p>
-</footer>
+<nav class="tabbar" aria-label="Main" data-i18n-aria="Main">
+  <button type="button" data-nav="home"><span class="tab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg></span><span data-i18n="Home">Home</span></button>
+  <button type="button" data-nav="study"><span class="tab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></svg></span><span data-i18n="Study">Study</span></button>
+  <button type="button" data-nav="handbook"><span class="tab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5c3-1.5 7-1.5 10 1 3-2.5 7-2.5 10-1v14c-3-1.5-7-1.5-10 1-3-2.5-7-2.5-10-1z"/><path d="M12 6v14"/></svg></span><span data-i18n="Handbook">Handbook</span></button>
+  <button type="button" data-nav="progress"><span class="tab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span data-i18n="Progress">Progress</span></button>
+  <button type="button" data-nav="more"><span class="tab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span data-i18n="More">More</span></button>
+</nav>
 
 <dialog id="zoom" aria-labelledby="zoomTitle">
-  <div class="dlg-head"><h2 id="zoomTitle" data-i18n="Enlarged picture">Enlarged picture</h2><button type="button" class="btn" data-close data-i18n="Close">Close</button></div>
+  <div class="dlg-head"><h2 id="zoomTitle" data-i18n="Enlarged picture">Enlarged picture</h2><button type="button" class="btn sm" data-close data-i18n="Close">Close</button></div>
   <img id="zoomImg" alt="">
-  <p id="zoomAlt" class="muted"></p>
+  <p id="zoomAlt" class="muted small"></p>
 </dialog>
 <dialog id="confirm" aria-labelledby="confirmTitle">
   <h2 id="confirmTitle"></h2>
   <p id="confirmText"></p>
   <div class="row end"><button type="button" class="btn" id="confirmNo">Cancel</button><button type="button" class="btn primary" id="confirmYes">OK</button></div>
 </dialog>
-
 <dialog id="noteDlg" aria-labelledby="noteTitle">
   <h2 id="noteTitle" data-i18n="Note">Note</h2>
   <label for="noteText" class="sr" data-i18n="Note text">Note text</label>
-  <textarea id="noteText" rows="5" style="width:min(80vw,520px);font:inherit;border-radius:10px;border:2px solid var(--border);background:var(--surface);color:var(--text);padding:.5rem"></textarea>
-  <div class="row end" style="margin-top:.6rem"><button type="button" class="btn danger" id="noteDelete" data-i18n="Delete note">Delete note</button><button type="button" class="btn" id="noteCancel" data-i18n="Cancel">Cancel</button><button type="button" class="btn primary" id="noteSave" data-i18n="Save note">Save note</button></div>
+  <textarea id="noteText" rows="5" style="width:min(84vw,520px)"></textarea>
+  <div class="row end"><button type="button" class="btn danger" id="noteDelete" data-i18n="Delete note">Delete note</button><button type="button" class="btn" id="noteCancel" data-i18n="Cancel">Cancel</button><button type="button" class="btn primary" id="noteSave" data-i18n="Save note">Save note</button></div>
 </dialog>
+<dialog id="sheet" class="sheet" aria-labelledby="sheetTitle"><div class="sheet-in"><div class="grabber" aria-hidden="true"></div><div id="sheetBody"></div></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
 
 <noscript><p class="banner">This app needs JavaScript turned on in your browser.</p></noscript>
 <script src="data/sources.js"></script>
@@ -63,7 +62,10 @@
 <script src="data/q-safety-laws.js"></script>
 <script src="data/handbook-index.js"></script>
 <script src="data/handbook-pages.js"></script>
+<script src="data/handbook-text.js"></script>
+<script src="data/study.js"></script>
 <script src="js/i18n.js"></script>
+<script src="js/i18n-more.js"></script>
 <script src="data/tr-es.js"></script>
 <script src="data/tr-pt.js"></script>
 <script src="js/engine.js"></script>

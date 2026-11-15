@@ -188,7 +188,7 @@ t(HBI.length > 0 && HBI.every((h, i) => HBP[h.page - 1] && HBP[h.page - 1].hl.so
 t(HBP.every(p => p.w.length > 0 || p.hl.length === 0), 'pages with highlights have word boxes');
 
 section('Translations');
-vm.runInContext(fs.readFileSync(path.join(APP, 'js', 'i18n.js'), 'utf8'), ctx, { filename: 'js/i18n.js' });
+for (const f of ['i18n.js', 'i18n-more.js']) vm.runInContext(fs.readFileSync(path.join(APP, 'js', f), 'utf8'), ctx, { filename: 'js/' + f });
 const I18N = W.I18N || {}, TR = W.DMV_TR || {};
 const appSrc = fs.readFileSync(path.join(APP, 'js', 'app.js'), 'utf8');
 const LIT = `'((?:[^'\\\\]|\\\\.)*)'`, unesc = s => s.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
@@ -196,6 +196,7 @@ const uiKeys = new Set();
 for (const m of appSrc.matchAll(new RegExp(`\\bt\\(\\s*${LIT}`, 'g'))) uiKeys.add(unesc(m[1]));
 for (const m of appSrc.matchAll(new RegExp(`\\bt\\([^'()]*\\?\\s*${LIT}\\s*:\\s*${LIT}`, 'g'))) { uiKeys.add(unesc(m[1])); uiKeys.add(unesc(m[2])); }
 for (const m of appSrc.matchAll(new RegExp(`\\bk: ${LIT}`, 'g'))) uiKeys.add(unesc(m[1]));
+for (const m of appSrc.matchAll(/\bt\(\s*"((?:[^"\\]|\\.)*)"/g)) uiKeys.add(m[1]);
 for (const m of html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g)) uiKeys.add(m[1]);
 TOPICS.forEach(tp => uiKeys.add(tp.name));
 const vars = s => (s.match(/\{\w+\}/g) || []).sort().join();
@@ -218,6 +219,37 @@ for (const lang of ['es', 'pt']) {
   }
   for (const id of Object.keys(Q)) if (!MAP[id]) err(`${lang}: translation for unknown question ${id}`);
   console.log(`  ${lang}: ${uiKeys.size - miss}/${uiKeys.size} UI texts, ${badVars} placeholder problem(s), ${qOk}/${BANK.length} questions`);
+}
+
+section('Handbook text and study sheets');
+const HT = (W.HANDBOOK_TEXT || {}).chapters || [], ST = W.DMV_STUDY || [];
+t(HT.length === 14, `handbook text has ${HT.length} chapters`);
+t(HT.every(c => c.b.length >= 3), 'every handbook chapter has content');
+t(HT.every(c => c.b.filter(b => b[0] === 'fig').every(b => fs.existsSync(path.join(APP, b[1])))), 'all handbook figures exist');
+const impSeen = new Set(); HT.forEach(c => c.b.forEach(b => { for (const m of String(b[1]).matchAll(/data-i="(\d+)"/g)) impSeen.add(+m[1]); }));
+t(impSeen.size >= HBI.length - 3, `${impSeen.size} of ${HBI.length} important passages are marked in the phone reader`);
+for (const s of ST) for (const it of s.items) {
+  for (const l of ['en', 'es', 'pt']) if (!it[1][l]) err(`study sheet ${s.id}: missing ${l} text`);
+  if (it[2] && !fs.existsSync(path.join(APP, it[2]))) err(`study sheet ${s.id}: picture missing ${it[2]}`);
+  for (const tp of s.topics) if (!TOPICS.some(x => x.key === tp)) err(`study sheet ${s.id}: unknown topic ${tp}`);
+}
+t(ST.length >= 8, `${ST.length} cheat sheets, ${ST.reduce((a, s) => a + s.items.length, 0)} facts, all in 3 languages`);
+{
+  const DAY = 86400000, now = new Date(2026, 5, 10, 14).getTime();
+  t(E.activity(E.defaultState(), now).streak === 0, 'streak is 0 with no practice');
+  const T1 = E.defaultState(); T1.attempts = [{ q: 'A', c: true, t: now }, { q: 'A', c: true, t: now - DAY }, { q: 'A', c: true, t: now - 2 * DAY }];
+  t(E.activity(T1, now).streak === 3 && E.activity(T1, now).today === 1, 'streak counts days in a row');
+  const T2 = E.defaultState(); T2.attempts = [{ q: 'A', c: true, t: now - DAY }]; t(E.activity(T2, now).streak === 1, 'yesterday keeps the streak alive');
+  const T3 = E.defaultState(); T3.attempts = [{ q: 'A', c: true, t: now - 3 * DAY }]; t(E.activity(T3, now).streak === 0, 'a missed day resets the streak');
+  const C = E.defaultState(); const cids = ['x', 'y', 'z'];
+  t(E.dueCards(C, cids, now).fresh.length === 3, 'new flashcards start as fresh');
+  E.gradeCard(C, 'x', true, now); t(C.cards.x.b === 2 && C.cards.x.due > now, 'knowing a card moves it up a box and delays it');
+  E.gradeCard(C, 'x', false, now); t(C.cards.x.b === 1, 'missing a card sends it back to box 1');
+  for (let i = 0; i < 6; i++) E.gradeCard(C, 'y', true, now);
+  t(C.cards.y.b === 5, 'boxes stop at 5');
+  t(E.dueCards(C, cids, now + 40 * DAY).due.length === 2, 'cards come back when due');
+  t(E.importData(E.exportData(C)).state.cards.y.b === 5, 'flashcard progress survives export and import');
+  t(Object.keys(E.resetProgress(C).cards).length === 0, 'reset clears flashcard progress');
 }
 
 console.log(`\n${errors} error(s), ${warnings} warning(s)`);

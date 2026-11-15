@@ -7,9 +7,9 @@
   const MAX_HISTORY = 150;
   const APP_STUDY_TARGET = 85; // app's own study goal, NOT an official DMV passing score
 
-  function defaultSettings() { return { theme: 'light', textSize: 'medium', reducedMotion: false }; }
+  function defaultSettings() { return { theme: 'light', textSize: 'medium', reducedMotion: false, dailyGoal: 20 }; }
   function defaultState() {
-    return { version: 1, settings: defaultSettings(), attempts: [], qstats: {}, mistakes: {}, bookmarks: {}, history: [], active: null, handbookMarks: { hl: [], notes: [] } };
+    return { version: 1, settings: defaultSettings(), attempts: [], qstats: {}, mistakes: {}, bookmarks: {}, history: [], active: null, handbookMarks: { hl: [], notes: [] }, cards: {} };
   }
 
   // ---------- randomness ----------
@@ -210,7 +210,44 @@
     return !!state.bookmarks[qid];
   }
   function resetProgress(state) { // keeps appearance settings and handbook highlights/notes
-    const s = defaultState(); s.settings = Object.assign(defaultSettings(), state.settings); if (state.handbookMarks) s.handbookMarks = state.handbookMarks; return s;
+    const s = defaultState(); s.settings = Object.assign(defaultSettings(), state.settings); if (state.handbookMarks) s.handbookMarks = state.handbookMarks; return s; // flashcard boxes are progress, so they are cleared
+  }
+
+  // ---------- study streak, daily goal, readiness ----------
+  function dayKey(ts) { const d = new Date(ts); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function activity(state, now = Date.now()) { // answers per local day, today's count and the current streak of days in a row
+    const days = {};
+    for (const a of state.attempts) { const k = dayKey(a.t); days[k] = (days[k] || 0) + 1; }
+    for (const id in (state.cards || {})) for (const t of (state.cards[id].log || [])) { const k = dayKey(t); days[k] = (days[k] || 0) + 1; }
+    const today = days[dayKey(now)] || 0;
+    let streak = 0; const d = new Date(now); d.setHours(12, 0, 0, 0);
+    if (!today) d.setDate(d.getDate() - 1); // today not started yet: the streak can still continue
+    while (days[dayKey(d.getTime())]) { streak++; d.setDate(d.getDate() - 1); }
+    return { days, today, streak };
+  }
+  function readiness(state, bankMap, recentN = 50) { // mastered = last answer correct; recent = accuracy of the latest answers
+    const ids = Object.keys(bankMap);
+    const mastered = ids.filter(id => state.qstats[id] && state.qstats[id].last === true).length;
+    const recent = state.attempts.filter(a => bankMap[a.q]).slice(-recentN);
+    const rc = recent.filter(a => a.c).length;
+    return { mastered, total: ids.length, masteredPct: ids.length ? Math.round(mastered / ids.length * 100) : 0,
+      recentN: recent.length, recentPct: accuracy(rc, recent.length) };
+  }
+  // ---------- flashcards (Leitner boxes 1-5; a box sets how many days until the card comes back) ----------
+  const BOX_DAYS = [0, 0, 1, 3, 7, 16];
+  function gradeCard(state, qid, knew, now = Date.now()) {
+    if (!state.cards) state.cards = {};
+    const c = state.cards[qid] || (state.cards[qid] = { b: 1, due: now, log: [] });
+    c.b = knew ? Math.min(5, c.b + 1) : 1;
+    c.due = now + BOX_DAYS[c.b] * 86400000 + (knew ? 0 : 60000);
+    c.log = (c.log || []).concat(now).slice(-20);
+    return c;
+  }
+  function dueCards(state, ids, now = Date.now()) { // never-seen cards and cards that are due, most overdue first
+    const cards = state.cards || {};
+    const seen = ids.filter(id => cards[id] && cards[id].due <= now).sort((a, b) => cards[a].due - cards[b].due);
+    const fresh = ids.filter(id => !cards[id]);
+    return { due: seen, fresh, learned: ids.filter(id => cards[id] && cards[id].b >= 4).length };
   }
 
   // ---------- export / import ----------
@@ -248,7 +285,7 @@
     STORAGE_KEY, APP_STUDY_TARGET, defaultState, makeRng, shuffle, choiceOrder, accuracy, accuracyText,
     createSession, select, submit, finishExam, feedbackVisible, sessionStats, archiveSession,
     lifetime, topicStats, weakestTopics, activeMistakes, pickWeighted, buildExam, toggleBookmark, resetProgress,
-    exportData, importData, load, save, normalize
+    exportData, importData, load, save, normalize, dayKey, activity, readiness, gradeCard, dueCards
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.DMVEngine = api;
 })(typeof window !== 'undefined' ? window : globalThis);

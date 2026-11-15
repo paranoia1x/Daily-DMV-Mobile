@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const ROOT = path.join(__dirname, '..');
 const list = ['index.html', 'manifest.webmanifest'];
-for (const dir of ['css', 'js', 'data', 'img']) {
+for (const dir of ['css', 'js', 'data', 'img', 'handbook/fig']) {
   (function walk(d) {
     for (const f of fs.readdirSync(path.join(ROOT, d))) {
       const rel = d + '/' + f;
