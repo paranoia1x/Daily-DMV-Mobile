@@ -70,3 +70,7 @@ button, a, label, .choice { -webkit-tap-highlight-color: rgba(0, 0, 0, .08); tou
 @media (display-mode: standalone) {
   .topbar { padding-top: max(.6rem, env(safe-area-inset-top)); }
 }
+/* language switcher */
+.lang-row { margin: -.25rem 0 .75rem; }
+.lang-switch { display: inline-flex; align-items: center; gap: .35rem; font-size: 1.1rem; }
+.lang-switch select { width: auto; min-height: 40px; }

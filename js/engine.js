@@ -126,7 +126,7 @@
     if (!session.finishedAt) session.finishedAt = now;
     const st = sessionStats(session);
     const rec = {
-      id: session.id, mode: session.mode, label: session.label, isExam: session.isExam, isRetry: session.isRetry,
+      id: session.id, mode: session.mode, label: session.label, lk: session.lk, isExam: session.isExam, isRetry: session.isRetry,
       startedAt: session.startedAt, finishedAt: session.finishedAt, qids: session.qids, orders: session.orders,
       answers: session.answers, selections: session.selections,
       total: st.total, answered: st.answered, correct: st.correct, incorrect: st.incorrect,

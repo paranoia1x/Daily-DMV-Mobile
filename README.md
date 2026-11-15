@@ -14,6 +14,7 @@ This is the phone and tablet version of the Daily-DMV desktop app. It has the sa
 - **Installable:** it works offline after the first visit (this is called a Progressive Web App). It uses an app icon and opens full-screen from your home screen.
 - **Backups:** Export progress opens your phone's share sheet, so you can save the backup to Files or Drive, or send it to yourself.
 - **Handbook PDF:** the downloadable PDF links to dmv.ca.gov instead of being stored in the app, which keeps the download small. The in-app reader has every page.
+- **Languages:** English, Español, and Português. Pick one from the 🌐 menu on Home or in Settings. All 326 questions, explanations, and screens are translated. The Spanish and Portuguese text was machine (AI) translated and has not been reviewed by a native speaker, so compare with the English if something reads oddly. The handbook pages stay in English. In Spanish, the PDF link opens the DMV's official Spanish handbook. The DMV does not publish a Portuguese handbook.
 
 ## Use it on a phone
 
@@ -30,7 +31,8 @@ To try it on a computer: run `python -m http.server 8766` in this folder and ope
 
 - Plain HTML, CSS, and JavaScript with no build step. `index.html` is the entry point.
 - `css/mobile.css` holds the mobile layout. Everything else matches the desktop app.
-- `node tools/validate.js` checks the question bank and the handbook data and tests the scoring engine.
+- `node tools/validate.js` checks the question bank, the handbook data, and the translations, and tests the scoring engine.
+- Translations: screen text is in `js/i18n.js`, keyed by the exact English text. Question translations are in `data/tr-es.js` and `data/tr-pt.js`, with choices in the same order as the English. Anything missing falls back to English.
 - **After changing any file, run `node tools/build-sw.js`.** It regenerates `sw.js` with a new version number, so installed copies pick up the update.
 
 ## Credits and licenses

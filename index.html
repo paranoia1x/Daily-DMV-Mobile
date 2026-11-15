@@ -17,16 +17,16 @@
 <link rel="apple-touch-icon" href="img/icon-180.png">
 </head>
 <body>
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main" data-i18n="Skip to main content">Skip to main content</a>
 <header class="topbar">
-  <button type="button" class="brand" data-nav="home" aria-label="CA Driver Test Practice, go to Home"><img src="img/logo.svg" alt="" width="40" height="40"><span>CA Driver Test Practice</span></button>
-  <nav aria-label="Main" class="tabbar">
-    <button type="button" data-nav="home"><span class="ico" aria-hidden="true">🏠</span><span class="lbl">Home</span></button>
-    <button type="button" data-nav="handbook"><span class="ico" aria-hidden="true">📖</span><span class="lbl">Handbook</span></button>
-    <button type="button" data-nav="progress"><span class="ico" aria-hidden="true">📊</span><span class="lbl">Progress</span></button>
-    <button type="button" data-nav="settings"><span class="ico" aria-hidden="true">⚙️</span><span class="lbl">Settings</span></button>
-    <button type="button" data-nav="sources"><span class="ico" aria-hidden="true">🔗</span><span class="lbl">Sources</span></button>
-    <button type="button" data-nav="help"><span class="ico" aria-hidden="true">❓</span><span class="lbl">Help</span></button>
+  <button type="button" class="brand" data-nav="home" aria-label="CA Driver Test Practice, go to Home" data-i18n-aria="CA Driver Test Practice, go to Home"><img src="img/logo.svg" alt="" width="40" height="40"><span>CA Driver Test Practice</span></button>
+  <nav aria-label="Main" class="tabbar" data-i18n-aria="Main">
+    <button type="button" data-nav="home"><span class="ico" aria-hidden="true">🏠</span><span class="lbl" data-i18n="Home">Home</span></button>
+    <button type="button" data-nav="handbook"><span class="ico" aria-hidden="true">📖</span><span class="lbl" data-i18n="Handbook">Handbook</span></button>
+    <button type="button" data-nav="progress"><span class="ico" aria-hidden="true">📊</span><span class="lbl" data-i18n="Progress">Progress</span></button>
+    <button type="button" data-nav="settings"><span class="ico" aria-hidden="true">⚙️</span><span class="lbl" data-i18n="Settings">Settings</span></button>
+    <button type="button" data-nav="sources"><span class="ico" aria-hidden="true">🔗</span><span class="lbl" data-i18n="Sources">Sources</span></button>
+    <button type="button" data-nav="help"><span class="ico" aria-hidden="true">❓</span><span class="lbl" data-i18n="Help">Help</span></button>
   </nav>
 </header>
 <div id="banner" class="banner" role="alert" hidden></div>
@@ -36,7 +36,7 @@
 </footer>
 
 <dialog id="zoom" aria-labelledby="zoomTitle">
-  <div class="dlg-head"><h2 id="zoomTitle">Enlarged picture</h2><button type="button" class="btn" data-close>Close</button></div>
+  <div class="dlg-head"><h2 id="zoomTitle" data-i18n="Enlarged picture">Enlarged picture</h2><button type="button" class="btn" data-close data-i18n="Close">Close</button></div>
   <img id="zoomImg" alt="">
   <p id="zoomAlt" class="muted"></p>
 </dialog>
@@ -47,10 +47,10 @@
 </dialog>
 
 <dialog id="noteDlg" aria-labelledby="noteTitle">
-  <h2 id="noteTitle">Note</h2>
-  <label for="noteText" class="sr">Note text</label>
+  <h2 id="noteTitle" data-i18n="Note">Note</h2>
+  <label for="noteText" class="sr" data-i18n="Note text">Note text</label>
   <textarea id="noteText" rows="5" style="width:min(80vw,520px);font:inherit;border-radius:10px;border:2px solid var(--border);background:var(--surface);color:var(--text);padding:.5rem"></textarea>
-  <div class="row end" style="margin-top:.6rem"><button type="button" class="btn danger" id="noteDelete">Delete note</button><button type="button" class="btn" id="noteCancel">Cancel</button><button type="button" class="btn primary" id="noteSave">Save note</button></div>
+  <div class="row end" style="margin-top:.6rem"><button type="button" class="btn danger" id="noteDelete" data-i18n="Delete note">Delete note</button><button type="button" class="btn" id="noteCancel" data-i18n="Cancel">Cancel</button><button type="button" class="btn primary" id="noteSave" data-i18n="Save note">Save note</button></div>
 </dialog>
 
 <noscript><p class="banner">This app needs JavaScript turned on in your browser.</p></noscript>
@@ -63,6 +63,9 @@
 <script src="data/q-safety-laws.js"></script>
 <script src="data/handbook-index.js"></script>
 <script src="data/handbook-pages.js"></script>
+<script src="js/i18n.js"></script>
+<script src="data/tr-es.js"></script>
+<script src="data/tr-pt.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/app.js"></script>
 </body>

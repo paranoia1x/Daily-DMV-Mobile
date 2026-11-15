@@ -187,5 +187,38 @@ t(HBP.length > 0 && HBP.every(p => fs.existsSync(path.join(APP, p.img))), `all $
 t(HBI.length > 0 && HBI.every((h, i) => HBP[h.page - 1] && HBP[h.page - 1].hl.some(r => r[4] === i)), `all ${HBI.length} important passages have highlight boxes on the right page`);
 t(HBP.every(p => p.w.length > 0 || p.hl.length === 0), 'pages with highlights have word boxes');
 
+section('Translations');
+vm.runInContext(fs.readFileSync(path.join(APP, 'js', 'i18n.js'), 'utf8'), ctx, { filename: 'js/i18n.js' });
+const I18N = W.I18N || {}, TR = W.DMV_TR || {};
+const appSrc = fs.readFileSync(path.join(APP, 'js', 'app.js'), 'utf8');
+const LIT = `'((?:[^'\\\\]|\\\\.)*)'`, unesc = s => s.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+const uiKeys = new Set();
+for (const m of appSrc.matchAll(new RegExp(`\\bt\\(\\s*${LIT}`, 'g'))) uiKeys.add(unesc(m[1]));
+for (const m of appSrc.matchAll(new RegExp(`\\bt\\([^'()]*\\?\\s*${LIT}\\s*:\\s*${LIT}`, 'g'))) { uiKeys.add(unesc(m[1])); uiKeys.add(unesc(m[2])); }
+for (const m of appSrc.matchAll(new RegExp(`\\bk: ${LIT}`, 'g'))) uiKeys.add(unesc(m[1]));
+for (const m of html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g)) uiKeys.add(m[1]);
+TOPICS.forEach(tp => uiKeys.add(tp.name));
+const vars = s => (s.match(/\{\w+\}/g) || []).sort().join();
+const CORRECT = { es: /^Correcto\./, pt: /^Correto\./ };
+for (const lang of ['es', 'pt']) {
+  const D = I18N[lang] || {}, Q = TR[lang] || {};
+  let miss = 0, badVars = 0;
+  for (const k of uiKeys) { if (!(k in D)) { miss++; err(`${lang}: missing UI text "${k.slice(0, 60)}"`); } }
+  for (const k of Object.keys(D)) if (vars(k) !== vars(D[k])) { badVars++; err(`${lang}: placeholder mismatch in "${k.slice(0, 60)}"`); }
+  let qOk = 0;
+  for (const q of BANK) {
+    const tq = Q[q.id];
+    if (!tq) { err(`${lang}: ${q.id} not translated`); continue; }
+    if (!tq.q || tq.c.length !== q.choices.length) { err(`${lang}: ${q.id} has wrong choice count`); continue; }
+    const ci = q.choices.findIndex(c => c.correct);
+    const marked = tq.c.map((c, i) => CORRECT[lang].test(c[1]) ? i : -1).filter(i => i >= 0);
+    if (marked.length !== 1 || marked[0] !== ci) { err(`${lang}: ${q.id} correct-answer explanation is on the wrong choice`); continue; }
+    if (q.image && !tq.alt) err(`${lang}: ${q.id} picture has no translated description`);
+    qOk++;
+  }
+  for (const id of Object.keys(Q)) if (!MAP[id]) err(`${lang}: translation for unknown question ${id}`);
+  console.log(`  ${lang}: ${uiKeys.size - miss}/${uiKeys.size} UI texts, ${badVars} placeholder problem(s), ${qOk}/${BANK.length} questions`);
+}
+
 console.log(`\n${errors} error(s), ${warnings} warning(s)`);
 process.exit(errors ? 1 : 0);
