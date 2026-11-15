@@ -1,0 +1,182 @@
+{
+ "added-lane": {
+  "commonsFile": "MUTCD W4-3.svg",
+  "license": "Public domain"
+ },
+ "crossroad": {
+  "commonsFile": "MUTCD W2-1.svg",
+  "license": "Public domain"
+ },
+ "curve-left": {
+  "commonsFile": "MUTCD W1-2L.svg",
+  "license": "Public domain"
+ },
+ "curve-right": {
+  "commonsFile": "MUTCD W1-2R.svg",
+  "license": "Public domain"
+ },
+ "directional-arrow": {
+  "commonsFile": "MUTCD W1-6.svg",
+  "license": "Public domain"
+ },
+ "divided-highway": {
+  "commonsFile": "MUTCD W6-1.svg",
+  "license": "Public domain"
+ },
+ "do-not-block": {
+  "commonsFile": "MUTCD R10-7.svg",
+  "license": "Public domain"
+ },
+ "do-not-enter": {
+  "commonsFile": "MUTCD R5-1.svg",
+  "license": "Public domain"
+ },
+ "do-not-pass": {
+  "commonsFile": "MUTCD R4-1.svg",
+  "license": "Public domain"
+ },
+ "emergency-parking-only": {
+  "commonsFile": "MUTCD R8-4.svg",
+  "license": "Public domain"
+ },
+ "end-divided-highway": {
+  "commonsFile": "MUTCD W6-2.svg",
+  "license": "Public domain"
+ },
+ "flagger": {
+  "commonsFile": "MUTCD CW20-7.svg",
+  "license": "Public domain"
+ },
+ "keep-right-arrow": {
+  "commonsFile": "MUTCD R4-7b.svg",
+  "license": "Public domain"
+ },
+ "lane-ends": {
+  "commonsFile": "MUTCD W4-2.svg",
+  "license": "Public domain"
+ },
+ "left-turn-only": {
+  "commonsFile": "MUTCD R3-5L.svg",
+  "license": "Public domain"
+ },
+ "left-turn-yield-on-green": {
+  "commonsFile": "MUTCD R10-12.svg",
+  "license": "Public domain"
+ },
+ "merging-traffic": {
+  "commonsFile": "MUTCD W4-1.svg",
+  "license": "Public domain"
+ },
+ "no-left-turn": {
+  "commonsFile": "MUTCD R3-2.svg",
+  "license": "Public domain"
+ },
+ "no-parking-any-time": {
+  "commonsFile": "MUTCD R7-1.svg",
+  "license": "Public domain"
+ },
+ "no-right-turn": {
+  "commonsFile": "MUTCD R3-1.svg",
+  "license": "Public domain"
+ },
+ "no-turn-on-red": {
+  "commonsFile": "MUTCD R10-11.svg",
+  "license": "Public domain"
+ },
+ "no-turns": {
+  "commonsFile": "MUTCD R3-3.svg",
+  "license": "Public domain"
+ },
+ "no-u-turn": {
+  "commonsFile": "MUTCD R3-4.svg",
+  "license": "Public domain"
+ },
+ "one-way-horizontal": {
+  "commonsFile": "MUTCD R6-1R.svg",
+  "license": "Public domain"
+ },
+ "one-way-vertical": {
+  "commonsFile": "MUTCD R6-2R.svg",
+  "license": "Public domain"
+ },
+ "pedestrian-crossing": {
+  "commonsFile": "MUTCD W11-2.svg",
+  "license": "Public domain"
+ },
+ "road-closed-ahead": {
+  "commonsFile": "MUTCD W20-3 (temporary).svg",
+  "license": "Public domain"
+ },
+ "road-work-ahead": {
+  "commonsFile": "MUTCD W20-1.svg",
+  "license": "Public domain"
+ },
+ "rr-advance": {
+  "commonsFile": "MUTCD W10-1.svg",
+  "license": "Public domain"
+ },
+ "rr-crossbuck": {
+  "commonsFile": "MUTCD R15-1.svg",
+  "license": "Public domain"
+ },
+ "school": {
+  "commonsFile": "MUTCD S1-1.svg",
+  "license": "Public domain"
+ },
+ "shoulder-work-ahead": {
+  "commonsFile": "MUTCD CW21-5.svg",
+  "license": "Public domain"
+ },
+ "side-road": {
+  "commonsFile": "MUTCD W2-2R.svg",
+  "license": "Public domain"
+ },
+ "signal-ahead": {
+  "commonsFile": "MUTCD W3-3.svg",
+  "license": "Public domain"
+ },
+ "slippery-when-wet": {
+  "commonsFile": "MUTCD W8-5.svg",
+  "license": "Public domain"
+ },
+ "slower-traffic-keep-right": {
+  "commonsFile": "MUTCD R4-3.svg",
+  "license": "Public domain"
+ },
+ "stop": {
+  "commonsFile": "MUTCD R1-1.svg",
+  "license": "Public domain"
+ },
+ "stop-ahead": {
+  "commonsFile": "MUTCD W3-1.svg",
+  "license": "Public domain"
+ },
+ "t-intersection": {
+  "commonsFile": "MUTCD W2-4.svg",
+  "license": "Public domain"
+ },
+ "three-tracks": {
+  "commonsFile": "MUTCD R15-2P.svg",
+  "license": "Public domain"
+ },
+ "two-way-traffic": {
+  "commonsFile": "MUTCD W6-3.svg",
+  "license": "Public domain"
+ },
+ "winding-road": {
+  "commonsFile": "MUTCD W1-5L.svg",
+  "license": "Public domain"
+ },
+ "wrong-way": {
+  "commonsFile": "MUTCD R5-1a.svg",
+  "license": "Public domain"
+ },
+ "yield": {
+  "commonsFile": "MUTCD R1-2.svg",
+  "license": "Public domain"
+ },
+ "yield-ahead": {
+  "commonsFile": "MUTCD W3-2.svg",
+  "license": "Public domain"
+ }
+}

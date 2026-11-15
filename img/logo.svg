@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Original logo for this independent practice app (not a DMV or State of California mark). -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B6E99"/>
+      <stop offset="0.62" stop-color="#2E9CCA"/>
+      <stop offset="1" stop-color="#F08A4B"/>
+    </linearGradient>
+    <clipPath id="tile"><rect x="4" y="4" width="112" height="112" rx="26"/></clipPath>
+  </defs>
+  <rect x="4" y="4" width="112" height="112" rx="26" fill="url(#sky)"/>
+  <g clip-path="url(#tile)">
+    <circle cx="60" cy="70" r="20" fill="#FFD27A"/>
+    <path d="M0 70 Q30 60 60 70 T120 66 L120 120 L0 120 Z" fill="#F3E3C0"/>
+    <path d="M44 120 L56 70 L64 70 L76 120 Z" fill="#3A3F45"/>
+    <path d="M60 74 L60 80 M60 86 L60 95 M60 102 L60 116" stroke="#FFD100" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <circle cx="88" cy="32" r="19" fill="#FFFFFF" stroke="#0B3D56" stroke-width="3"/>
+  <path d="M79 32 L86 39 L98 25" fill="none" stroke="#17733A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="4" y="4" width="112" height="112" rx="26" fill="none" stroke="#0B3D56" stroke-width="3"/>
+</svg>

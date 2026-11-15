@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-text="medium">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CA Driver Test Practice</title>
+<meta name="description" content="Offline practice for the California Class C driver's license knowledge test.">
+<meta name="theme-color" content="#1f5fbf">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DMV Practice">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="topbar">
+  <button type="button" class="brand" data-nav="home" aria-label="CA Driver Test Practice, go to Home"><img src="img/logo.svg" alt="" width="40" height="40"><span>CA Driver Test Practice</span></button>
+  <nav aria-label="Main" class="tabbar">
+    <button type="button" data-nav="home"><span class="ico" aria-hidden="true">🏠</span><span class="lbl">Home</span></button>
+    <button type="button" data-nav="handbook"><span class="ico" aria-hidden="true">📖</span><span class="lbl">Handbook</span></button>
+    <button type="button" data-nav="progress"><span class="ico" aria-hidden="true">📊</span><span class="lbl">Progress</span></button>
+    <button type="button" data-nav="settings"><span class="ico" aria-hidden="true">⚙️</span><span class="lbl">Settings</span></button>
+    <button type="button" data-nav="sources"><span class="ico" aria-hidden="true">🔗</span><span class="lbl">Sources</span></button>
+    <button type="button" data-nav="help"><span class="ico" aria-hidden="true">❓</span><span class="lbl">Help</span></button>
+  </nav>
+</header>
+<div id="banner" class="banner" role="alert" hidden></div>
+<main id="main" tabindex="-1"></main>
+<footer class="footer">
+  <p id="notice"></p>
+</footer>
+
+<dialog id="zoom" aria-labelledby="zoomTitle">
+  <div class="dlg-head"><h2 id="zoomTitle">Enlarged picture</h2><button type="button" class="btn" data-close>Close</button></div>
+  <img id="zoomImg" alt="">
+  <p id="zoomAlt" class="muted"></p>
+</dialog>
+<dialog id="confirm" aria-labelledby="confirmTitle">
+  <h2 id="confirmTitle"></h2>
+  <p id="confirmText"></p>
+  <div class="row end"><button type="button" class="btn" id="confirmNo">Cancel</button><button type="button" class="btn primary" id="confirmYes">OK</button></div>
+</dialog>
+
+<dialog id="noteDlg" aria-labelledby="noteTitle">
+  <h2 id="noteTitle">Note</h2>
+  <label for="noteText" class="sr">Note text</label>
+  <textarea id="noteText" rows="5" style="width:min(80vw,520px);font:inherit;border-radius:10px;border:2px solid var(--border);background:var(--surface);color:var(--text);padding:.5rem"></textarea>
+  <div class="row end" style="margin-top:.6rem"><button type="button" class="btn danger" id="noteDelete">Delete note</button><button type="button" class="btn" id="noteCancel">Cancel</button><button type="button" class="btn primary" id="noteSave">Save note</button></div>
+</dialog>
+
+<noscript><p class="banner">This app needs JavaScript turned on in your browser.</p></noscript>
+<script src="data/sources.js"></script>
+<script src="data/q-signs.js"></script>
+<script src="data/q-signals-markings.js"></script>
+<script src="data/q-roads.js"></script>
+<script src="data/q-speed-parking.js"></script>
+<script src="data/q-sharing.js"></script>
+<script src="data/q-safety-laws.js"></script>
+<script src="data/handbook-index.js"></script>
+<script src="data/handbook-pages.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
