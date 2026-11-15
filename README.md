@@ -1,6 +1,8 @@
 # Daily-DMV Mobile — CA Driver Test Practice for phones
 
-This is the phone and tablet version of [Daily-DMV](https://github.com/paranoia1x/Daily-DMV). It has the same 326 questions, road signs, explanations, practice modes, progress tracking, and handbook reader, with a layout made for touch screens. You can add it to your home screen, and after the first visit it works offline.
+**▶ Open the app: https://paranoia1x.github.io/Daily-DMV-Mobile/**
+
+This is the phone and tablet version of the Daily-DMV desktop app. It has the same 326 questions, road signs, explanations, practice modes, progress tracking, and handbook reader, with a layout made for touch screens. You can add it to your home screen, and after the first visit it works offline.
 
 > **Independent practice app. Not affiliated with the California DMV. Use the current DMV handbook as the official reference.** Using this app does not guarantee you will pass.
 
@@ -15,7 +17,7 @@ This is the phone and tablet version of [Daily-DMV](https://github.com/paranoia1
 
 ## Use it on a phone
 
-The app has to be served over **https**, for example with GitHub Pages. Then:
+Open **https://paranoia1x.github.io/Daily-DMV-Mobile/** on your phone. Then:
 
 - **iPhone / iPad (Safari):** open the site, tap **Share → Add to Home Screen**.
 - **Android (Chrome):** open the site, tap **⋮ → Install app** (or **Add to Home screen**).
